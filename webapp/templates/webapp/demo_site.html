@@ -1,15 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Best DevOps Course Recommendation</title>
+    <title>DevOps Learning Hub</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -18,134 +19,114 @@
             color: #333;
         }
 
-        /* HEADER */
         header {
             background: linear-gradient(135deg, #2c3e50, #4CAF50);
-            padding: 50px 20px;
-            text-align: center;
             color: white;
+            text-align: center;
+            padding: 50px 20px;
         }
 
-        header h2 {
+        header h1 {
             font-size: 32px;
         }
 
         header p {
             margin-top: 10px;
-            font-size: 16px;
             opacity: 0.9;
         }
 
-        /* MAIN CONTAINER */
         .container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
             padding: 30px;
         }
 
-        /* CARD STYLE */
+        h2 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
         .card {
             background: white;
+            padding: 20px;
             border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
             transition: 0.3s;
+            text-align: center;
         }
 
         .card:hover {
             transform: translateY(-5px);
         }
 
-        nav {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        nav h3 {
-            margin-bottom: 15px;
-            color: #4CAF50;
-        }
-
-        nav ul {
-            list-style: none;
-        }
-
-        nav ul li {
-            margin: 15px 0;
-        }
-
-        /* BUTTON LINKS */
-        nav ul li a {
-            display: block;
-            text-decoration: none;
-            background: #2c3e50;
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
+        /* IMAGE STYLE */
+        .card-img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 10px;
             transition: 0.3s;
         }
-
-        nav ul li a:hover {
-            background: #4CAF50;
-        }
-
-        article {
-            flex: 2;
-            min-width: 300px;
-        }
-
-        article h1 {
+        .devops-img {
+            width: 100%;
+            max-width: 500px;   /* 👈 smaller image */
+            max-height: 140px;  /* 👈 reduce height */
+            object-fit: cover;
+            border-radius: 10px;
             margin-bottom: 15px;
-            color: #2c3e50;
         }
 
-        article p {
-            margin-bottom: 12px;
-            line-height: 1.6;
+        /* For multiple icons */
+        .icon-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
-        /* HIGHLIGHT BOX */
-        .highlight {
-            background: #e8f5e9;
-            padding: 15px;
-            border-left: 5px solid #4CAF50;
-            margin-top: 15px;
-            border-radius: 8px;
+        .card:hover .card-img {
+            transform: scale(1.1);
         }
 
-        /* CTA BUTTON */
-        .cta {
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
             display: inline-block;
-            margin-top: 15px;
-            padding: 12px 20px;
+            padding: 10px 15px;
             background: #4CAF50;
             color: white;
-            border-radius: 8px;
             text-decoration: none;
-            font-weight: bold;
+            border-radius: 8px;
             transition: 0.3s;
         }
 
-        .cta:hover {
+        .btn:hover {
             background: #2c3e50;
         }
 
-        /* FOOTER */
+        .highlight {
+            border: 2px solid #4CAF50;
+             max-width: 600px;   /* 👈 control size */
+             margin: auto;       /* 👈 center it */
+        }
+
         footer {
             background: #2c3e50;
-            padding: 20px;
-            text-align: center;
             color: white;
-            margin-top: 20px;
-        }
-
-        /* RESPONSIVE */
-        @media(max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -153,58 +134,83 @@
 <body>
 
 <header>
-     <h2>🚀 DevOps Course by Abhishek Veeramalla</h2>
-    <p>Learn DevOps from scratch with one of the best FREE courses on YouTube</p>
-    <p><b>Recommended by Vanshika Jaiswal | Senior Software Engineer | VWORK EMC Solutions | EX-BOSCH</b></p>
+    <h1>🚀 DevOps Learning Hub</h1>
+    <p>Curated by Vanshika Jaiswal | Senior Software Engineer | VWORK EMC Solutions | EX-BOSCH</p>
 </header>
 
 <div class="container">
 
-    <nav class="card">
-        <h3>🔗 Useful Links</h3>
-        <ul>
-            <li>
-                <a href="https://www.youtube.com/@AbhishekVeeramalla" target="_blank">
-                    🎥 Watch DevOps Course
-                </a>
-            </li>
-            <li>
-                <a href="https://www.linkedin.com/in/vanshika-jaiswal-14b059216/" target="_blank">
-                    💼 My LinkedIn
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <!-- PRIMARY RECOMMENDATION -->
+    <h2>⭐ Primary Recommendation</h2>
+    <div class="grid">
+        <div class="card highlight">
+            <img src="{% static 'images/devops.png' %}" class="devops-img">
+            <h3>Full DevOps Course By - Abhishek Veeramalla</h3>
+            <p>Best complete DevOps course for beginners with practical learning.</p>
+            <a href="https://www.youtube.com/@AbhishekVeeramalla" target="_blank" class="btn">
+                🎥 Watch Course
+            </a>
+        </div>
+    </div>
 
-    <article class="card">
-        <h1>📌 Why This Course?</h1>
+    <!-- TOPIC WISE -->
+    <h2>📚 Topic-wise Learning</h2>
+    <div class="grid">
 
-        <p>
-            As a <b>Senior Software Engineer</b>, I highly recommend this DevOps course
-            for anyone who wants to build a strong foundation in DevOps.
-        </p>
-
-        <p>
-            This course helped me gain clarity on core DevOps concepts and tools
-            with real-world practical understanding.
-        </p>
-
-        <div class="highlight">
-            ✅ Beginner-friendly<br>
-            ✅ Practical & hands-on<br>
-            ✅ Covers real DevOps tools<br>
-            ✅ Completely FREE on YouTube
+        <div class="card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" class="card-img">
+            <h3>🐧 Linux Basics</h3>
+            <p>Strong Linux Foundation for DevOps beginners By CodeWithHarry.</p>
+            <a href="https://www.youtube.com/watch?v=_tCY-c-sPZc&t=1s" target="_blank" class="btn">
+                Learn Linux
+            </a>
         </div>
 
-        <a href="https://www.youtube.com/@AbhishekVeeramalla" target="_blank" class="cta">
-            🚀 Start Learning Now
-        </a>
-    </article>
+        <div class="card">
+            <div class="icon-group">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="card-img">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" class="card-img">
+            </div>
+            <h3>🐳 Docker & Kubernetes</h3>
+            <p>Containerization and orchestration fundamentals by TechWorldwithNana.</p>
+            <a href="https://www.youtube.com/watch?v=jPdIRX6q4jA&list=PLy7NrYWoggjwPggqtFsI_zMAwvG0SqYCb" target="_blank" class="btn">
+                Learn Docker & K8s
+            </a>
+        </div>
+
+        <div class="card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg" class="card-img">
+            <h3>⚙️ Ansible</h3>
+            <p>Automation using Ansible by Abhishek Veeramalla.</p>
+            <a href="https://www.youtube.com/playlist?list=PLdpzxOOAlwvLxd5nmtmORCmhD5jkrNbuE" target="_blank" class="btn">
+                Learn Ansible
+            </a>
+        </div>
+
+        <div class="card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" class="card-img">
+            <h3>🌍 Terraform</h3>
+            <p>Infrastructure as Code - Zero to Hero series.</p>
+            <a href="https://www.youtube.com/watch?v=fgp-t5SqQmM&list=PLdpzxOOAlwvI0O4PeKVV1-yJoX2AqIWuf" target="_blank" class="btn">
+                Learn Terraform
+            </a>
+        </div>
+
+        <div class="card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" class="card-img">
+            <h3>🔄 CI/CD Pipelines</h3>
+            <p>GitLab CI/CD tutorials by TechWorld with Nana.</p>
+            <a href="https://www.youtube.com/@TechWorldwithNana/playlists" target="_blank" class="btn">
+                Learn CI/CD
+            </a>
+        </div>
+
+    </div>
 
 </div>
 
 <footer>
-    <p>© 2026 Vanshika Jaiswal | Sharing knowledge ❤️</p>
+    <p>© 2026 Vanshika Jaiswal | DevOps Learning Hub ❤️</p>
 </footer>
 
 </body>
