@@ -22,7 +22,7 @@ This project demonstrates end-to-end DevOps practices including application deve
 * **Frontend:** HTML, CSS
 * **Containerization:** Docker
 
----
+```
 
 ## 📂 Project Structure
 
@@ -39,7 +39,7 @@ DEVOPS/
 │       └── webapp/
 │           └── demo_site.html
 
----
+```
 
 ## 📦 Dependency Management
 
@@ -50,6 +50,21 @@ The file was generated using:
 pip freeze > requirements.txt
 
 This ensures all required Python packages and their exact versions are captured, enabling consistent builds across environments and inside Docker containers.
+
+---
+
+## 🐳 Dockerization Details
+
+The application is containerized using Docker for consistent and portable deployment.
+
+### 🔹 Dockerfile Overview
+
+* Uses Python as the base image
+* Sets working directory inside container
+* Copies application code into container
+* Installs dependencies from `requirements.txt`
+* Exposes port `8000` for the Django app
+* Runs the Django development server
 
 ---
 
@@ -74,6 +89,7 @@ http://127.0.0.1:8000/webapp/
 Pull and run directly:
 
 docker pull vanshikamod/devops-learning-hub:v1
+
 docker run -p 8000:8000 vanshikamod/devops-learning-hub:v1
 
 ---
@@ -85,16 +101,11 @@ docker run -p 8000:8000 vanshikamod/devops-learning-hub:v1
 git clone https://github.com/vanshikajaiswal814/python-devops-app.git
 cd python-devops-app
 
-### 2. Create Virtual Environment
-
-python -m venv venv
-venv\Scripts\activate   # Windows
-
-### 3. Install Dependencies
+### 2. Install Dependencies
 
 pip install -r requirements.txt
 
-### 4. Run Server
+### 3. Run Server
 
 python manage.py runserver
 
@@ -105,7 +116,8 @@ python manage.py runserver
 * Application containerization using Docker
 * Dependency management using pip and requirements.txt
 * Use of `pip freeze` for capturing exact package versions
-* Docker image creation and optimization
+* Writing and using a Dockerfile for building images
+* Docker image creation and execution
 * Docker Hub integration for image distribution
 * Debugging container and port-related issues
 
