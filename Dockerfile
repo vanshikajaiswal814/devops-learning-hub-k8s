@@ -14,5 +14,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 
 # Run Django app
-ENTRYPOINT ["python3"]
-CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT [ "python" ]
+CMD ["manage.py", "runserver", "0.0.0.0:8000", "--noreload"]
