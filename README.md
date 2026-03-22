@@ -22,10 +22,11 @@ This project demonstrates end-to-end DevOps practices including application deve
 * **Frontend:** HTML, CSS
 * **Containerization:** Docker
 
-```
+---
 
 ## 📂 Project Structure
 
+```
 DEVOPS/
 │
 ├── Dockerfile
@@ -38,8 +39,9 @@ DEVOPS/
 │   └── templates/
 │       └── webapp/
 │           └── demo_site.html
-
 ```
+
+---
 
 ## 📦 Dependency Management
 
@@ -47,7 +49,9 @@ Project dependencies are managed using `requirements.txt`.
 
 The file was generated using:
 
+```
 pip freeze > requirements.txt
+```
 
 This ensures all required Python packages and their exact versions are captured, enabling consistent builds across environments and inside Docker containers.
 
@@ -68,19 +72,68 @@ The application is containerized using Docker for consistent and portable deploy
 
 ---
 
+## ⚠️ Important: Why `--noreload` is used
+
+In the Docker container, the Django server is started using:
+
+```
+python manage.py runserver 0.0.0.0:8000 --noreload
+```
+
+### 💡 Reason:
+
+By default, Django runs with **auto-reload (StatReloader)** enabled, which:
+
+* Starts multiple processes internally
+* Watches for file changes
+* Is useful for local development
+
+### 🚫 Problem in Docker:
+
+Docker containers are designed to run a **single main process**.
+Auto-reload can cause:
+
+* Multiple processes inside container
+* Unstable behavior during container stop/start
+* Duplicate or inconsistent logs
+
+### ✅ Solution:
+
+Using `--noreload` ensures:
+
+* Single process execution
+* Stable container lifecycle
+* Clean and predictable logs
+
+---
+
 ## 🐳 Docker Setup
 
 ### 🔹 Build Docker Image
 
+```
 docker build -t python-web-app .
+```
 
-### 🔹 Run Container
+### 🔹 Run Container (Interactive Mode)
 
-docker run -p 8000:8000 python-web-app
+```
+docker run -it -p 8000:8000 python-web-app
+```
+
+### 💡 Why Interactive Mode?
+
+* Helps in viewing logs in real-time
+* Useful for debugging container behavior
+* Prevents confusion where logs appear "stuck"
+
+---
 
 ### 🔹 Access Application
 
+```
 http://127.0.0.1:8000/webapp/
+```
 
 ---
 
@@ -88,9 +141,10 @@ http://127.0.0.1:8000/webapp/
 
 Pull and run directly:
 
+```
 docker pull vanshikamod/devops-learning-hub:v1
-
-docker run -p 8000:8000 vanshikamod/devops-learning-hub:v1
+docker run -it -p 8000:8000 vanshikamod/devops-learning-hub:v1
+```
 
 ---
 
@@ -98,16 +152,22 @@ docker run -p 8000:8000 vanshikamod/devops-learning-hub:v1
 
 ### 1. Clone Repository
 
+```
 git clone https://github.com/vanshikajaiswal814/python-devops-app.git
 cd python-devops-app
+```
 
 ### 2. Install Dependencies
 
+```
 pip install -r requirements.txt
+```
 
 ### 3. Run Server
 
+```
 python manage.py runserver
+```
 
 ---
 
@@ -120,6 +180,7 @@ python manage.py runserver
 * Docker image creation and execution
 * Docker Hub integration for image distribution
 * Debugging container and port-related issues
+* Understanding process management inside containers
 
 ---
 
