@@ -1,0 +1,3 @@
+NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+devops-learning-hub-service   NodePort    10.105.148.218   <none>        80:30007/TCP   63s
+kubernetes                    ClusterIP   10.96.0.1        <none>        443/TCP        6d8h

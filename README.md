@@ -1,215 +1,245 @@
-# 🚀 DevOps Learning Hub
+# DevOps Learning Hub - Kubernetes Deployment
 
-A Django-based web application that curates the best free DevOps learning resources in a structured, topic-wise format for beginners and professionals.
+## Overview
 
-This project demonstrates end-to-end DevOps practices including application development, containerization, and deployment readiness.
+DevOps Learning Hub is a Django-based web application that curates the best free DevOps learning resources in a structured, topic-wise format for both beginners and experienced professionals.
 
----
-
-## 🌟 Features
-
-* 📚 Topic-wise DevOps learning resources
-* 🎯 Curated best free courses from industry experts
-* 🐳 Fully Dockerized application
-* 💻 Clean and responsive UI
-* 🚀 Ready for deployment
+This project demonstrates how a Python Django application can be containerized using Docker and deployed on Kubernetes using Deployments and Services.
 
 ---
 
-## 🛠️ Tech Stack
+## Features
 
-* **Backend:** Python, Django
-* **Frontend:** HTML, CSS
-* **Containerization:** Docker
+- Curated DevOps learning resources
+- Topic-wise organization of content
+- Django-based web application
+- Docker containerization
+- Kubernetes deployment with multiple replicas
+- External access using Kubernetes NodePort Service
 
 ---
 
-## 📂 Project Structure
+## Technology Stack
 
-```
-DEVOPS/
+- Python
+- Django
+- Docker
+- Kubernetes
+- Minikube
+- kubectl
+
+---
+
+## Project Structure
+
+```text
+python-devops-app/
 │
+├── devops/
+├── webapp/
+├── deployment.yaml
+├── service.yaml
 ├── Dockerfile
 ├── requirements.txt
 ├── manage.py
-├── db.sqlite3
-│
-├── devops/        # Project settings
-├── webapp/        # Application code
-│   └── templates/
-│       └── webapp/
-│           └── demo_site.html
+├── README.md
+└── DevOps_learning_hub.png
 ```
 
 ---
 
-## 📦 Dependency Management
+## Containerization
 
-Project dependencies are managed using `requirements.txt`.
+The application is containerized using Docker and published to Docker Hub.
 
-The file was generated using:
+Docker Image:
 
-```
-pip freeze > requirements.txt
-```
-
-This ensures all required Python packages and their exact versions are captured, enabling consistent builds across environments and inside Docker containers.
-
----
-
-## 🐳 Dockerization Details
-
-The application is containerized using Docker for consistent and portable deployment.
-
-### 🔹 Dockerfile Overview
-
-* Uses Python as the base image
-* Sets working directory inside container
-* Copies application code into container
-* Installs dependencies from `requirements.txt`
-* Exposes port `8000` for the Django app
-* Runs the Django development server
-
----
-
-## ⚠️ Important: Why `--noreload` is used
-
-In the Docker container, the Django server is started using:
-
-```
-python manage.py runserver 0.0.0.0:8000 --noreload
-```
-
-### 💡 Reason:
-
-By default, Django runs with **auto-reload (StatReloader)** enabled, which:
-
-* Starts multiple processes internally
-* Watches for file changes
-* Is useful for local development
-
-### 🚫 Problem in Docker:
-
-Docker containers are designed to run a **single main process**.
-Auto-reload can cause:
-
-* Multiple processes inside container
-* Unstable behavior during container stop/start
-* Duplicate or inconsistent logs
-
-### ✅ Solution:
-
-Using `--noreload` ensures:
-
-* Single process execution
-* Stable container lifecycle
-* Clean and predictable logs
-
----
-
-## 🐳 Docker Setup
-
-### 🔹 Build Docker Image
-
-```
-docker build -t python-web-app .
-```
-
-### 🔹 Run Container (Interactive Mode)
-
-```
-docker run -it -p 8000:8000 python-web-app
-```
-
-### 💡 Why Interactive Mode?
-
-* Helps in viewing logs in real-time
-* Useful for debugging container behavior
-* Prevents confusion where logs appear "stuck"
-
----
-
-### 🔹 Access Application
-
-```
-http://127.0.0.1:8000/webapp/
+```text
+vanshikamod/devops-learning-hub:v1
 ```
 
 ---
 
-## 🌍 Docker Hub Image
+## Kubernetes Deployment
 
-Pull and run directly:
+The application is deployed using a Kubernetes Deployment with:
 
-```
-docker pull vanshikamod/devops-learning-hub:v1
-docker run -it -p 8000:8000 vanshikamod/devops-learning-hub:v1
-```
+- 2 replicas
+- ReplicaSet management
+- Self-healing capability
+- Desired state management
+- Rolling update support
 
----
+Deployment verification:
 
-## 🔧 Local Development Setup
-
-### 1. Clone Repository
-
-```
-git clone https://github.com/vanshikajaiswal814/python-devops-app.git
-cd python-devops-app
-```
-
-### 2. Install Dependencies
-
-```
-pip install -r requirements.txt
-```
-
-### 3. Run Server
-
-```
-python manage.py runserver
+```bash
+kubectl get deployments
+kubectl get rs
+kubectl get pods
 ```
 
 ---
 
-## 🎯 Key DevOps Concepts Demonstrated
+## Kubernetes Service
 
-* Application containerization using Docker
-* Dependency management using pip and requirements.txt
-* Use of `pip freeze` for capturing exact package versions
-* Writing and using a Dockerfile for building images
-* Docker image creation and execution
-* Docker Hub integration for image distribution
-* Debugging container and port-related issues
-* Understanding process management inside containers
+The application is exposed externally using a NodePort Service.
 
----
+Service configuration:
 
-## 🚀 Future Enhancements
+- Service Type: NodePort
+- Service Port: 80
+- Target Port: 8000
+- NodePort: 30007
 
-* Add Docker Compose (multi-container setup)
-* Integrate CI/CD pipeline using GitHub Actions
-* Deploy on cloud platform (AWS / Azure / Render)
-* Replace SQLite with PostgreSQL
+Verification:
+
+```bash
+kubectl get svc
+```
 
 ---
 
-## 👩‍💻 Author
+## Deployment Architecture
+
+```text
+                     User Request
+                           |
+                           |
+                Kubernetes Service
+                     (NodePort)
+                           |
+          --------------------------------
+          |                              |
+          |                              |
+        Pod-1                          Pod-2
+          |                              |
+          --------------------------------
+                           |
+                      Deployment
+```
+
+---
+
+## Running the Application
+
+Deploy the application:
+
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
+
+Verify resources:
+
+```bash
+kubectl get deployments
+kubectl get rs
+kubectl get pods
+kubectl get svc
+```
+
+---
+
+## Real-World Troubleshooting Experience
+
+While testing the application on Minikube running on Windows, the application was not accessible using:
+
+```text
+http://<minikube-ip>:30007
+```
+
+Although:
+
+- Pods were healthy
+- Service was correctly configured
+- Endpoints were available
+- NodePort was exposed
+
+the connection failed.
+
+### Root Cause
+
+When Minikube runs with the Docker driver on Windows, the Minikube node exists within an internal Docker-managed network. As a result, the Minikube IP address may not always be directly reachable from the host operating system.
+
+### Solution
+
+Use:
+
+```bash
+minikube service devops-learning-hub-service --url
+```
+
+This creates the required route between the host machine and the Kubernetes service and provides a reachable URL.
+
+### Linux vs Windows
+
+Linux environments can often access NodePort services directly using:
+
+```bash
+http://<minikube-ip>:<node-port>
+```
+
+However, on Windows with the Docker driver, accessing services through:
+
+```bash
+minikube service <service-name> --url
+```
+
+is generally more reliable.
+
+---
+
+## Kubernetes Concepts Demonstrated
+
+- Pods
+- ReplicaSets
+- Deployments
+- NodePort Services
+- Service Discovery
+- Container Networking
+- Scaling Applications
+- Self-Healing
+- Load Distribution
+- Kubernetes Troubleshooting
+- Minikube Networking
+
+---
+
+## Useful Commands
+
+```bash
+kubectl get pods
+kubectl get deployments
+kubectl get rs
+kubectl get svc
+
+kubectl describe deployment devops-learning-hub-deployment
+kubectl describe service devops-learning-hub-service
+
+kubectl logs <pod-name>
+
+kubectl delete -f deployment.yaml
+kubectl delete -f service.yaml
+```
+
+---
+
+## Learning Outcomes
+
+Through this project, I gained practical experience in:
+
+- Building and containerizing a Django application
+- Deploying applications on Kubernetes
+- Managing Deployments and ReplicaSets
+- Exposing applications using Services
+- Understanding NodePort networking
+- Troubleshooting Minikube connectivity issues
+- Working with Kubernetes resource management and scaling
+
+---
+
+## Author
 
 **Vanshika Jaiswal**
-Senior Software Engineer
 
----
-
-## 💡 Project Purpose
-
-This project was built to:
-
-* Strengthen DevOps fundamentals
-* Practice real-world containerization
-* Create an interview-ready end-to-end project
-
----
-
-## ⭐ If you like this project
-
-Give it a ⭐ on GitHub and feel free to contribute!
+DevOps | Cloud | Kubernetes | Automation Enthusiast
